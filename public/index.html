@@ -31,43 +31,7 @@
 
   <script src="/socket.io/socket.io.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script>
-    $(function () {
-      const socket = io();
-      const $prompt = $('#prompt');
-      const $chatContainer = $('#chat-container');
-      const $nameForm = $('#name-form');
-      const $nameInput = $('#name-input');
-      const $chatContent = $('#chat-content');
-      const $messages = $('#messages');
-      const $form = $('#form');
-      const $input = $('#input');
-      let username;
-
-      $nameForm.submit(function() {
-        username = $nameInput.val();
-        if (username) {
-          $prompt.addClass('hidden');
-          $chatContainer.removeClass('hidden');
-        }
-        return false;
-      });
-  
-      $form.submit(function() {
-        if ($input.val()) {
-          socket.emit('chat message', { username, message: $input.val() });
-          $input.val('');
-        }
-        return false;
-      });
-  
-      socket.on('chat message', function(data) {
-        $messages.append($('<li>').text(data.username + ": " + data.message));
-        $chatContent.scrollTop($chatContent[0].scrollHeight);
-      });
-  
-    });
-  </script>
+  <script src="./myscripts.js"></script>
   
 </body>
 </html>
