@@ -24,7 +24,8 @@ $(function () {
         if ($input.val()) {
           let message = $input.val();
           if (message === "/help") {
-            alert("This is the help message. Replace this with the actual help message you want to display in the popup box.");
+            // Show the modal
+            document.getElementById('helpModal').style.display = "block";
           } else if (message === "/clear") {
             $messages.empty();
           } else {
@@ -35,11 +36,16 @@ $(function () {
             }
             socket.emit('chat message', { username, message });
           }
-          
+      
           $input.val('');
         }
         return false;
       });
+      
+     
+      document.getElementById('close').onclick = function() {
+        document.getElementById('helpModal').style.display = "none";
+      }
       
 
       socket.on('chat message', function(data) {
