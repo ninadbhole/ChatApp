@@ -21,22 +21,30 @@ $(function () {
     });
 
     $form.submit(function() {
-      if ($input.val()) {
-        let message = $input.val();
-        for (const word in emojies) {
-          if (message.includes(word)) {
-            message = message.replace(new RegExp(word, "gi"), emojies[word]);
+        if ($input.val()) {
+          let message = $input.val();
+          if (message === "/help") {
+            alert("This is the help message. Replace this with the actual help message you want to display in the popup box.");
+          } else if (message === "/clear") {
+            $messages.empty();
+          } else {
+            for (const word in emojies) {
+              if (message.includes(word)) {
+                message = message.replace(new RegExp(word, "gi"), emojies[word]);
+              }
+            }
+            socket.emit('chat message', { username, message });
           }
+          
+          $input.val('');
         }
-        socket.emit('chat message', { username, message });
-        $input.val('');
-      }
-      return false;
-    });
+        return false;
+      });
+      
 
-    socket.on('chat message', function(data) {
-      $messages.append($('<li>').text(data.username + ": " + data.message));
-      $chatContent.scrollTop($chatContent[0].scrollHeight);
-    });
+      socket.on('chat message', function(data) {
+        $messages.append($('<li>').text(data.username + ": " + data.message));
+        $chatContent.scrollTop($chatContent[0].scrollHeight);
+      });
 
   });
