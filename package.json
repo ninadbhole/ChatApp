@@ -3,8 +3,13 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+<<<<<<< HEAD
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
+=======
+    "start": "node app.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
+>>>>>>> 008811dfc5bd6d31fa18dec477d45ea56d454663
   },
   "repository": {
     "type": "git",
